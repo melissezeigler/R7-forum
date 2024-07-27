@@ -210,8 +210,11 @@ Ok, now we fill in the methods, one at a time.  Note that for some of them, noth
 ```ruby
 def create
   @post = @forum.posts.new(post_params)  # we create a new post for the current forum
-  @post.save
-  redirect_to @post, notice: "Your post was created."
+  if  @post.save
+    redirect_to @post, notice: "Your post was created."
+  else 
+    render :new, status: :unprocessable_entity
+  end
 end
 
 def new
@@ -225,9 +228,11 @@ def show    # nothing to do here
 end
 
 def update
-  @post = Post.new(post_params)
-  @post.save
-  redirect_to @post, notice: "Your post was updated."
+  if @post.update(post_params)
+    redirect_to @post, notice: "Your post was updated."
+  else
+    render :edit, status: :unprocessable_entity
+  end
 end
 
 def destroy
