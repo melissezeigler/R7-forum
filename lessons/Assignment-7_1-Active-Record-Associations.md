@@ -210,8 +210,11 @@ Ok, now we fill in the methods, one at a time.  Note that for some of them, noth
 ```ruby
 def create
   @post = @forum.posts.new(post_params)  # we create a new post for the current forum
-  @post.save
-  redirect_to @post, notice: "Your post was created."
+  if @post.save
+    redirect_to @post, notice: "Your post was created."
+  else 
+    render :new, status: :unprocessable_entity
+  end
 end
 
 def new
@@ -225,9 +228,11 @@ def show    # nothing to do here
 end
 
 def update
-  @post = Post.new(post_params)
-  @post.save
-  redirect_to @post, notice: "Your post was updated."
+  if @post.update(post_params)
+    redirect_to @post, notice: "Your post was updated."
+  else
+    render :edit, status: :unprocessable_entity
+  end
 end
 
 def destroy
@@ -236,6 +241,7 @@ def destroy
   redirect_to @forum, notice: "Your post was deleted."
 end
 ```
+Note that the save and update operations might fail.  The most common reason for this is that validation of the attributes fails, so that the user is requesting an invalid change.  We haven't added any validations -- we'll do that in a later lesson -- but, in the meantime, we check the return value for a save or update operation and if it fails, we re-render the right form, which will show any errors.  We don't do that here for destroy, because destroy throws an exception if it fails. We'll cover that later as well.
 ## Step 4: Posts Views
 
 Have a look at app/views/posts/show.html.erb.  Well, that's disappointing!  Nothing there but boilerplate. So, delete all of the files in this directory! We have to start over.  Let's see: In the context of a forum, we just want to see the author and title of the post.  We'd also want to see those things when displaying the post itself, and also the content of the post.  So, we'll start with a partial, _post.html.erb:
