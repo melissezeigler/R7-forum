@@ -1,10 +1,10 @@
-<%= form_with(model: user) do |form| %>
-  <% if user.errors.any? %>
+<%= form_with(model: post) do |form| %>
+  <% if post.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
 
       <ul>
-        <% user.errors.each do |error| %>
+        <% post.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -12,23 +12,53 @@
   <% end %>
 
   <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
   </div>
 
-  # <div>
-  #   <%= form.label :skill_level, style: "display: block" %>
-  #   <%= form.text_field :skill_level %>
-  # </div>
-
-   <div>
-    <%= form.radio_button :skill_level, "beginner" %>
-    <%= form.label :beginner, "beginner" %>
-    <%= form.radio_button :skill_level, "intermediate" %>
-    <%= form.label :intermediate, "intermediate" %>
-    <%= form.radio_button :skill_level, "expert" %>
-    <%= form.label :expert, "expert" %>
+  <div>
+    <%= form.label :content, style: "display: block" %>
+    <%= form.text_area :content,  size: "50x20" %>
   </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+
+
+# <%= form_with(model: user) do |form| %>
+#   <% if user.errors.any? %>
+#     <div style="color: red">
+#       <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+#       <ul>
+#         <% user.errors.each do |error| %>
+#           <li><%= error.full_message %></li>
+#         <% end %>
+#       </ul>
+#     </div>
+#   <% end %>
+
+#   <div>
+#     <%= form.label :name, style: "display: block" %>
+#     <%= form.text_field :name %>
+#   </div>
+
+#   # <div>
+#   #   <%= form.label :skill_level, style: "display: block" %>
+#   #   <%= form.text_field :skill_level %>
+#   # </div>
+
+#    <div>
+#     <%= form.radio_button :skill_level, "beginner" %>
+#     <%= form.label :beginner, "beginner" %>
+#     <%= form.radio_button :skill_level, "intermediate" %>
+#     <%= form.label :intermediate, "intermediate" %>
+#     <%= form.radio_button :skill_level, "expert" %>
+#     <%= form.label :expert, "expert" %>
+#   </div>
 
 
   <div>
