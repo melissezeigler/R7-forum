@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  # resources :subscriptions
   get 'posts/create'
   get 'posts/new'
   get 'posts/edit'
