@@ -1,19 +1,31 @@
-<%= form_with(model: forum) do |form| %>
-  <% if forum.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(forum.errors.count, "error") %> prohibited this forum from being saved:</h2>
+<%= form_with(model: post) do |form| %>
+  <% if post.id
+  url = post_path
+  else 
+  url = forum_posts_path(post.forum)
+  end %>
+  <%= form_with(model: post, url: url) do |form| %>
 
-      <ul>
-        <% forum.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  # <% if post.errors.any? %>
+  #   <div style="color: red">
+  #     <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+  #     <ul>
+  #       <% post.errors.each do |error| %>
+  #         <li><%= error.full_message %></li>
+  #       <% end %>
+  #     </ul>
+  #   </div>
+  # <% end %>
 
   <div>
-    <%= form.label :forum_name, style: "display: block" %>
-    <%= form.text_field :forum_name %>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :content, style: "display: block" %>
+    <%= form.text_area :content,  size: "50x20" %>
   </div>
 
   <div>
