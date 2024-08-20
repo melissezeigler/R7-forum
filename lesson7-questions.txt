@@ -109,5 +109,3 @@ The additional hask key and value is params[:forum_id]. The unaffected routes ar
 method may do all sorts of logic, but at the end, it has to do one of two
 things, depending on the outcome of the logic.  What are those two things?
 These are render a view to display a page(example: 'render:show') and redirect to another action or URL('redirect_to @forum').
-
-
