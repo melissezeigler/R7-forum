@@ -12,7 +12,8 @@ Rails.application.routes.draw do
   # delete '/users/:id', to: 'users#delete'
   resources :forums do
     resources :posts, shallow: true, except: [:index]
-    resources :subscriptions, shallow: true, except: [:index]
+    resources :subscriptions, only: [:new, :create, :show, :edit, :update, :destroy]
+    # resources :subscriptions, shallow: true, except: [:index]
   end
   get '/subscriptions', to: 'subscriptions#index', as: 'subscriptions'
 end
